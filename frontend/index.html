@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PickAflix</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- ========== HOME PAGE ========== -->
+  <div id="page-home" class="page active">
+    <!-- Scrolling poster background -->
+    <div class="poster-bg" id="poster-bg">
+      <div class="poster-overlay"></div>
+      <div class="poster-rows" id="poster-rows">
+        <div class="poster-row row-1" id="row-1"></div>
+        <div class="poster-row row-2" id="row-2"></div>
+        <div class="poster-row row-3" id="row-3"></div>
+      </div>
+    </div>
+
+    <header class="header">
+      <div class="logo" id="logo-home">Pick<span class="logo-a">A</span>flix</div>
+      <button class="btn-outline-red" id="btn-community-home">Community</button>
+        <button class="btn-nav-red hidden" id="btn-signout-home">Sign Out</button>
+    </header>
+
+    <main class="hero">
+      <p class="hero-welcome">Welcome to</p>
+      <h1 class="hero-brand">Pick<span class="logo-a">A</span>flix</h1>
+      <p class="hero-tagline">Your One Stop Movie Platform</p>
+      <p class="hero-subtitle">Discover your next favorite movie with personalized recommendations</p>
+      <button class="btn-recommend" id="btn-recommend">Recommend</button>
+    </main>
+  </div>
+
+  <!-- ========== SEARCH PAGE ========== -->
+  <div id="page-search" class="page">
+    <header class="header">
+      <div class="logo" id="logo-search">Pick<span class="logo-a">A</span>flix</div>
+      <button class="btn-outline-red hidden" id="btn-signout-search">Sign Out</button>
+    </header>
+    <main class="search-main">
+
+      <!-- MODE TOGGLE -->
+      <div class="mode-toggle">
+        <button class="mode-btn active" id="mode-search">🔍 Search Movies</button>
+        <button class="mode-btn" id="mode-recommend">🤖 Get Recommendations</button>
+      </div>
+
+      <!-- SEARCH MODE -->
+      <div id="search-mode">
+        <h2 class="page-heading">Find Your Perfect Movie</h2>
+        <p class="page-subheading">Search for any movie and discover amazing recommendations</p>
+        <div class="search-bar-wrap">
+          <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          <input id="search-input" class="search-input" type="text" placeholder="Search for a movie..." autocomplete="off" />
+        </div>
+        <div id="movie-grid" class="movie-grid"></div>
+        <p id="no-results" class="no-results hidden">No movies found. Try a different search.</p>
+      </div>
+
+      <!-- RECOMMEND MODE (CBT) -->
+      <div id="recommend-mode" class="hidden">
+        <h2 class="page-heading">🤖 Movie Recommendations</h2>
+        <p class="page-subheading">Enter a movie you love — our AI finds similar ones using Content-Based Filtering</p>
+        <div class="cbt-box">
+          <div class="cbt-how">
+            <span class="cbt-tag">TF-IDF Vectorization</span>
+            <span class="cbt-arrow">→</span>
+            <span class="cbt-tag">Cosine Similarity</span>
+            <span class="cbt-arrow">→</span>
+            <span class="cbt-tag">Top 10 Matches</span>
+          </div>
+          <div class="search-bar-wrap" style="max-width:520px">
+            <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+            <input id="cbt-input" class="search-input" type="text" placeholder="e.g. Inception, The Dark Knight..." autocomplete="off" />
+          </div>
+          <button class="btn-primary btn-cbt-go" id="btn-cbt-go">Find Similar Movies</button>
+          <p id="cbt-status" class="cbt-status hidden"></p>
+        </div>
+        <div id="cbt-results-header" class="hidden">
+          <p class="cbt-results-label">Because you liked <strong id="cbt-query-name"></strong>, you might enjoy:</p>
+        </div>
+        <div id="cbt-grid" class="movie-grid"></div>
+      </div>
+
+    </main>
+  </div>
+
+  <!-- ========== COMMUNITY PAGE ========== -->
+  <div id="page-community" class="page">
+    <header class="header">
+      <div class="logo" id="logo-community">Pick<span class="logo-a">A</span>flix</div>
+      <button class="btn-outline-red hidden" id="btn-signout-community">Sign Out</button>
+    </header>
+
+    <!-- AUTH VIEW -->
+    <main id="auth-view" class="auth-main">
+      <h2 class="community-heading">Pick<span class="logo-a">A</span>flix Community</h2>
+      <p class="page-subheading">Join our community of movie lovers</p>
+
+      <div class="auth-tabs">
+        <button class="auth-tab active" id="tab-signin">Sign In</button>
+        <button class="auth-tab" id="tab-create">Create Account</button>
+      </div>
+
+      <div id="form-signin" class="auth-form">
+        <div id="err-signin" class="auth-error hidden"></div>
+        <div class="field-group">
+          <label>Email</label>
+          <input type="email" id="signin-email" class="field-input" />
+        </div>
+        <div class="field-group">
+          <label>Password</label>
+          <input type="password" id="signin-password" class="field-input" />
+        </div>
+        <button class="btn-primary w-full" id="btn-signin">Sign In</button>
+        <p class="auth-footer">Don't have an account? <a href="#" id="link-to-create">Create Account</a></p>
+      </div>
+
+      <div id="form-create" class="auth-form hidden">
+        <div id="err-create" class="auth-error hidden"></div>
+        <div class="field-group">
+          <label>Username</label>
+          <input type="text" id="create-username" class="field-input" placeholder="e.g. cinephile42" />
+        </div>
+        <div class="field-group">
+          <label>Email</label>
+          <input type="email" id="create-email" class="field-input" />
+        </div>
+        <div class="field-group">
+          <label>Password</label>
+          <input type="password" id="create-password" class="field-input" />
+        </div>
+        <button class="btn-primary w-full" id="btn-create">Create Account</button>
+        <p class="auth-footer">Already have an account? <a href="#" id="link-to-signin">Sign In</a></p>
+      </div>
+    </main>
+
+    <!-- LOGGED IN VIEW -->
+    <main id="logged-view" class="logged-main hidden">
+      <!-- Welcome bar -->
+      <div class="welcome-bar">
+        <span class="welcome-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="24" height="24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        </span>
+        <span id="welcome-name" class="welcome-name"></span>
+      </div>
+
+      <!-- Tabs -->
+      <div class="comm-tabs">
+        <button class="comm-tab active" id="comm-tab-community">Community</button>
+        <button class="comm-tab" id="comm-tab-rankings">Rankings</button>
+      </div>
+
+      <!-- COMMUNITY TAB -->
+      <div id="community-tab">
+        <!-- My Profile -->
+        <div class="card" id="my-profile-card">
+          <div class="card-header">
+            <h3 class="card-title">My Profile</h3>
+            <div class="like-badge">
+              <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+              <span id="my-likes">0</span>
+            </div>
+          </div>
+          <button class="btn-primary btn-add-movie" id="btn-add-movie">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="16" height="16"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+            Add Movie Recommendation
+          </button>
+          <div class="recs-section">
+            <h4 class="recs-label" id="my-recs-label">My Movie Recommendations (0/8)</h4>
+            <div class="recs-grid" id="my-recs-grid"></div>
+          </div>
+        </div>
+
+        <!-- Find Fellow Cinephiles -->
+        <div class="card">
+          <h3 class="card-title">Find Fellow Cinephiles</h3>
+          <div id="cinephiles-list"></div>
+        </div>
+      </div>
+
+      <!-- RANKINGS TAB -->
+      <div id="rankings-tab" class="hidden">
+        <div class="card">
+          <h3 class="card-title">🏆 Cinephile Rankings</h3>
+          <div id="rankings-list"></div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- ========== ADD MOVIE MODAL ========== -->
+  <div id="modal-add" class="modal-overlay hidden">
+    <div class="modal">
+      <div class="modal-head">
+        <h3>Add Movie Recommendation</h3>
+        <button class="modal-x" id="modal-add-close">✕</button>
+      </div>
+      <div class="modal-search">
+        <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <input id="modal-search-input" class="search-input" type="text" placeholder="Search for a movie..." autocomplete="off" />
+      </div>
+      <div id="modal-results" class="modal-results"></div>
+    </div>
+  </div>
+
+  <!-- ========== COMMENT MODAL ========== -->
+  <div id="modal-comment" class="modal-overlay hidden">
+    <div class="modal modal-sm">
+      <div class="modal-head">
+        <h3 id="comment-title">Comments</h3>
+        <button class="modal-x" id="modal-comment-close">✕</button>
+      </div>
+      <div id="comments-list" class="comments-list"></div>
+      <div id="comment-composer" class="comment-composer">
+        <input id="comment-input" class="field-input" type="text" placeholder="Write a comment..." />
+        <button class="btn-primary" id="btn-post-comment">Post</button>
+      </div>
+      <p id="comment-login-prompt" class="comment-login hidden">
+        <a href="#" id="comment-login-link">Sign in</a> to leave a comment.
+      </p>
+    </div>
+  </div>
+
+  <!-- TOAST -->
+  <div id="toast" class="toast hidden"></div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="script.js"></script>
+</body>
+</html>
