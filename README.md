@@ -24,7 +24,7 @@ ML: TF-IDF + Cosine Similarity
 
 > A smart, social movie recommendation platform that combines **Content-Based Filtering (CBT)** with community-driven features like profiles, follows, likes, and comments.
 
-**Live Demo:** [pickaflix.netlify.app](https://pickaflix.netlify.app)
+
 
 ---
 
